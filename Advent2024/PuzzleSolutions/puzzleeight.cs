@@ -1,6 +1,6 @@
 namespace Advent2024;
 
-public class PuzzleSeven {
+public class PuzzleEight {
     public int StartElvesWorking(List<string> input, string word) {
         var occurrencecount = 0;
         var height = input.Count;
