@@ -50,8 +50,6 @@ internal class Program {
         var puzzlesevenresult = puzzleseven.StartElvesWorking(dayfourinput.ToList(), word);
         Console.WriteLine("Puzzle Seven's Answer: "+puzzlesevenresult);
 
-        dayfourinput = santasletteropener.BreakSeal("./input/dayfourtestinput.txt");
-
         var puzzleeightresult = puzzleeight.StartElvesWorking(dayfourinput.ToList(), word);
         Console.WriteLine("Puzzle Eight's Answer: "+puzzleeightresult);
     }

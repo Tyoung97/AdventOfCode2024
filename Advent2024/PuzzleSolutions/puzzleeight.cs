@@ -3,24 +3,8 @@ namespace Advent2024;
 public class PuzzleEight {
     public int StartElvesWorking(List<string> input, string word) {
         var occurrencecount = 0;
-        var height = input.Count;
-        var width = input[0].Length;
         var crossword = MakeSantasCrossword(input);
-
-        /* Horizontal technically we could just do this "var horizontallines = crosswordlist;" but I want to learn how to change things back and forth*/
-        var horizontallines = WriteALetterToSanta(crossword);
-        /* Vertical */
-        var verticallines = WriteALetterToSanta(SquintTurnThePaperAndLookAtItInAMirror(crossword));
-        /* Diagonal top center to left center */
-        var diagonallines = GrantSomeWishes(crossword);
-        /* Diagonal bottom center to left center */
-        var diagonallinesrotated = GrantSomeWishes(SquintAndTurnThePaper(crossword));
-
-        occurrencecount += GoForASleighRide(horizontallines,word);
-        occurrencecount += GoForASleighRide(verticallines,word);
-        occurrencecount += GoForASleighRide(diagonallines,word);
-        occurrencecount += GoForASleighRide(diagonallinesrotated,word);
-
+        occurrencecount = VisitEveryHouseInOneNight(crossword);
         return occurrencecount;
     }
     public char[,] MakeSantasCrossword(List<string> input){
@@ -39,86 +23,51 @@ public class PuzzleEight {
         }
         return crossword;
     }
-    public List<string> WriteALetterToSanta(char[,] somewishes) {
-        var lettertosanta = new List<string>();
-        var line = "";
-        for(var y = 0; y < somewishes.GetLength(1); y++) {
-            line = "";
-            for (var x = 0; x < somewishes.GetLength(0); x++) {
-                line += somewishes[x,y];
-            }
-            lettertosanta.Add(line);
-        }
-        return lettertosanta;
-    }
-    public char[,] SquintAndTurnThePaper(char[,] somewishes) {
-        var lettertosanta = new char[somewishes.GetLength(1),somewishes.GetLength(0)];
-        var newx = somewishes.GetLength(1) - 1;
-        var newy = 0;
-        for (var oldy = 0; oldy < somewishes.GetLength(0); oldy++) {
-            newy = 0;
-            for(var oldx = 0; oldx < somewishes.GetLength(1); oldx++) {
-                lettertosanta[newx,newy] = somewishes[oldx, oldy];
-                newy++;
-            }
-            newx--;
-        }
-        return lettertosanta;
-    }
-    public char[,] SquintTurnThePaperAndLookAtItInAMirror(char[,] somewishes) {
-        var lettertosanta = new char[somewishes.GetLength(1),somewishes.GetLength(0)];
-        for(var y = 0; y < somewishes.GetLength(1); y++) {
-            for (var x = 0; x < somewishes.GetLength(0); x++) {
-                lettertosanta[y,x] = somewishes[x,y];
-            }
-        }
-        return lettertosanta;
-    }
-    public List<string> GrantSomeWishes(char[,] somewishes) {
-        var lettertosanta = new List<string>();
-        var crawlx = somewishes.GetLength(0);
-        var crawly = 0;
-        var line = "";
-        for (var x = somewishes.GetLength(0); x >= 0; x--) {
-            crawlx = x;
-            crawly = 0;
-            while (crawlx < somewishes.GetLength(0) && crawly < somewishes.GetLength(1)) {
-                line += somewishes[crawlx,crawly];
-                crawlx++;
-                crawly++;
-            }
-            lettertosanta.Add(line);
-            line = "";
-        }
-        for (var y = 1; y < somewishes.GetLength(1); y++) {
-            crawlx = 0;
-            crawly = y;
-            while (crawlx < somewishes.GetLength(0) && crawly < somewishes.GetLength(1)) {
-                line += somewishes[crawlx,crawly];
-                crawlx++;
-                crawly++;
-            }
-            lettertosanta.Add(line);
-            line = "";
-        }
-        return lettertosanta;
-    }
-
-    public int GoForASleighRide(List<string> presents, string word) {
-        var validpresents = presents.Where(present => present.Length > 3).ToList();
-        var length = word.Length;
-        var presentsdelivered = 0;
-        var scaniterator = 0;
-        var reverseword = new string(word.Reverse().ToArray());
-        foreach (var present in validpresents) {
-            scaniterator = 0;
-            while (scaniterator < present.Length + 1 - word.Length) {
-                if (present.Substring(scaniterator,length).Contains(word) || present.Substring(scaniterator,length).Contains(reverseword)) {
-                    presentsdelivered++;
+    public int VisitEveryHouseInOneNight(char[,] input) {
+        // var height = input.GetLength(1);
+        // var width = input.GetLength(0);
+        var innerheight = input.GetLength(1)-1;
+        var innerwidth = input.GetLength(0)-1;
+        var xmascount = 0;
+        var leftsum = 0;//but not a checksum
+        var rightsum = 0;
+        for (var x = 1; x < innerwidth; x++) {
+            for(var y = 1; y < innerheight; y++) {
+                leftsum = 0;
+                rightsum = 0;
+                if (input[x,y] == 'A') {
+                    /* upleft */
+                    leftsum += input[x-1,y-1] switch {
+                        'M' => 1,
+                        'S' => 0,
+                        'X' => 3,
+                        'A' => 3
+                    };
+                    /* downright */
+                    leftsum += input[x+1,y+1] switch {
+                        'M' => 1,
+                        'S' => 0,
+                        'X' => 3,
+                        'A' => 3
+                    };
+                    /* upright */
+                    rightsum += input[x+1,y-1] switch {
+                        'M' => 1,
+                        'S' => 0,
+                        'X' => 3,
+                        'A' => 3
+                    };
+                    /* downleft */
+                    rightsum += input[x-1,y+1] switch {
+                        'M' => 1,
+                        'S' => 0,
+                        'X' => 3,
+                        'A' => 3
+                    };
+                    xmascount = leftsum == 1 && rightsum == 1 ? xmascount+1 : xmascount;
                 }
-                scaniterator++;
             }
         }
-        return presentsdelivered;
+        return xmascount;
     }
 }
