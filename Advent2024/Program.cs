@@ -14,6 +14,8 @@ internal class Program {
         var puzzlesix = new PuzzleSix();
         var puzzleseven = new PuzzleSeven();
         var puzzleeight = new PuzzleEight();
+        var puzzlenine = new PuzzleNine();
+        var puzzleten = new PuzzleTen();
 
         /* solve puzzle one and puzzle two*/
         var dayonefirstlist = santasletteropener.BreakSeal("./input/puzzleonelistone.txt", int.Parse);
@@ -52,5 +54,14 @@ internal class Program {
 
         var puzzleeightresult = puzzleeight.StartElvesWorking(dayfourinput.ToList(), word);
         Console.WriteLine("Puzzle Eight's Answer: "+puzzleeightresult);
+
+        /* solve puzzle nine and puzzle ten*/
+        var dayfiveinputvalues = santasletteropener.BreakSeal("./input/dayfiveinputvalues.txt",line => line.Split(',').Select(int.Parse).ToArray());
+        var dayfiveinputrules = santasletteropener.BreakSeal("./input/dayfiveinputrules.txt",line => line.Split('|') switch {var a => new Tuple<int,int>(int.Parse(a[0]), int.Parse(a[1]))});
+
+        var puzzlenineresult = puzzlenine.StartElvesWorking(dayfiveinputvalues, dayfiveinputrules);
+        Console.WriteLine("Puzzle Nine's Answer: "+puzzlenineresult);
+        var puzzletenresult = puzzleten.StartElvesWorking(dayfiveinputvalues, dayfiveinputrules);
+        Console.WriteLine("Puzzle Ten's Answer: "+puzzletenresult);
     }
 }

@@ -17,4 +17,14 @@ public class SantasLetterOpener {
         var fullline = lines.Aggregate(parselogic);
         return fullline;
     }
+    public List<int[]> BreakSeal(string path, Func<string,int[]> parselogic) {
+        var lines = File.ReadLines(path);
+        var breakseallist = lines.Select(parselogic).ToList();
+        return breakseallist;
+    }
+    public List<Tuple<int,int>> BreakSeal(string path, Func<string,Tuple<int,int>> parselogic) {
+        var lines = File.ReadLines(path);
+        var breakseallist = lines.Select(parselogic).ToList();
+        return breakseallist;
+    }
 }
