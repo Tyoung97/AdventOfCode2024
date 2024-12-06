@@ -4,7 +4,7 @@ public class GoFindYourFather {
         if (lowindex < highindex) {
             
             /*pivotindex is the location of the partition we are using*/
-            int pivotindex = HesAnAgryElf(arr, lowindex, highindex, rules);
+            int pivotindex = HesAnAngryElf(arr, lowindex, highindex, rules);
 
             /* after this is called recursively call for the left side
              then recursively call for the right side */
@@ -16,7 +16,7 @@ public class GoFindYourFather {
         if (lowindex < highindex) {
             
             /*pivotindex is the location of the partition we are using*/
-            int pivotindex = HesAnAgryElf(arr, lowindex, highindex);
+            int pivotindex = HesAnAngryElf(arr, lowindex, highindex);
 
             /* after this is called recursively call for the left side
              then recursively call for the right side */
@@ -24,7 +24,7 @@ public class GoFindYourFather {
             GiveItToBuddy(arr, pivotindex + 1, highindex);
         }
     }
-   public int HesAnAgryElf(int[] array, int lowindex, int highindex, Dictionary<int,Tuple<List<int>,List<int>>> rules) {
+   public int HesAnAngryElf(int[] array, int lowindex, int highindex, Dictionary<int,Tuple<List<int>,List<int>>> rules) {
         /* Choose a pivot value in this case the furthest right indexed value*/
         int pivotvalue = array[highindex];
         /* get just before the first index in the array so we can walk it left to right */
@@ -47,7 +47,7 @@ public class GoFindYourFather {
         SonOfANutcracker(array, currentindex + 1, highindex);
         return currentindex + 1;
     }
-   public int HesAnAgryElf(int[] array, int lowindex, int highindex) {
+   public int HesAnAngryElf(int[] array, int lowindex, int highindex) {
         /* Choose a pivot value in this case the furthest right indexed value*/
         int pivotvalue = array[highindex];
         /* get just before the first index in the array so we can walk it left to right */
