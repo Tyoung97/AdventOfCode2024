@@ -16,6 +16,7 @@ internal class Program {
         var puzzleeight = new PuzzleEight();
         var puzzlenine = new PuzzleNine();
         var puzzleten = new PuzzleTen();
+        var puzzleeleven = new PuzzleEleven();
 
         /* solve puzzle one and puzzle two*/
         var dayonefirstlist = santasletteropener.BreakSeal("./input/puzzleonelistone.txt", int.Parse);
@@ -63,5 +64,9 @@ internal class Program {
         Console.WriteLine("Puzzle Nine's Answer: "+puzzlenineresult);
         var puzzletenresult = puzzleten.StartElvesWorking(dayfiveinputvalues, dayfiveinputrules);
         Console.WriteLine("Puzzle Ten's Answer: "+puzzletenresult);
+
+        /* solve puzzle eleven and puzzle twelve*/
+        var daysixinputvalues = santasletteropener.BreakSeal("./input/daysixinputtestvalues.txt");
+        puzzleeleven.StartElvesWorking(daysixinputvalues);
     }
 }
