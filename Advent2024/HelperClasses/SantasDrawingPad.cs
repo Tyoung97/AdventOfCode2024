@@ -1,28 +1,41 @@
 namespace Advent2024;
 
 public class SantasDrawingPad() {
-    public int[] LineUpTheReindeer(List<int[]> walls, int[] position, Tuple<int,int> direction, int[] edgeofworld) {
-        var wallposition = position;
+    public int[] FindTheNextHouse(List<int[]> chimneys, int[] position, Tuple<int,int> direction, int[] edgeofworld) {
+        var chimneyposition = new int[3];
+        chimneyposition = position;
         var indexofitem = -1;
         //some basic guard rails
         if(edgeofworld.Length == 4) {
-            //loop till we find a wall or the edge of the world
+            //loop till we find a chimney or the edge of the world
             while(
-                wallposition[0] < edgeofworld[0]
-                && wallposition[0] > edgeofworld[1]
-                && wallposition[1] < edgeofworld[2]
-                && wallposition[1] > edgeofworld[3]
+                chimneyposition[0] > edgeofworld[0]
+                && chimneyposition[0] < edgeofworld[1]
+                && chimneyposition[1] > edgeofworld[2]
+                && chimneyposition[1] < edgeofworld[3]
             ) {
-                indexofitem = walls.FindIndex(wall => wall[0] == wallposition[0] && wall[1] == wallposition[1]);
+                indexofitem = chimneys.FindIndex(chimney => chimney[0] == chimneyposition[0] && chimney[1] == chimneyposition[1]);
                 if(indexofitem != -1) {
+                    (chimneyposition[0], chimneyposition[1], chimneyposition[2]) = (chimneyposition[0] - direction.Item1, chimneyposition[1] - direction.Item2, 0);
                     break;
                 }
-                (wallposition[0], wallposition[1]) = (wallposition[0] + direction.Item1, wallposition[1] + direction.Item2);
+                (chimneyposition[0], chimneyposition[1], chimneyposition[2]) = (chimneyposition[0] + direction.Item1, chimneyposition[1] + direction.Item2, 0);
+            }
+            if(indexofitem == -1) {
+                (chimneyposition[0], chimneyposition[1], chimneyposition[2]) = (chimneyposition[0] - direction.Item1, chimneyposition[1] - direction.Item2, 1);
             }
         }
-        if(indexofitem == -1) {
-            wallposition[2] = 1;
+        return chimneyposition;
+    }
+    public List<int[]> LookForChimneys(Location[,] santasmap, char symbol) {
+        var positions = new List<int[]>();
+        for (var y = 0; y < santasmap.GetLength(0); y++) {
+            for (var x = 0; x < santasmap.GetLength(1); x++) {
+                if(santasmap[y,x].locationsymbol == symbol) {
+                    positions.Add([y,x,0]);
+                }
+            }
         }
-        return wallposition;
+        return positions;
     }
 }

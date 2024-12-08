@@ -27,4 +27,19 @@ public class SantasLetterOpener {
         var breakseallist = lines.Select(parselogic).ToList();
         return breakseallist;
     }
+    public Location[,] BreakSeal(string path, int value) {
+        var lines = File.ReadLines(path).ToList();
+        var breakseallist = new Location[lines[0].Length,lines.Count()];
+        var x = 0;
+        var y = 0;
+        foreach(var line in lines) {
+            foreach (var chr in line) {
+                breakseallist[y,x] = new Location{locationsymbol = chr,locationwalked = value};
+                x++;
+            }
+            x = 0;
+            y++;
+        }
+        return breakseallist;
+    }
 }

@@ -66,7 +66,8 @@ internal class Program {
         Console.WriteLine("Puzzle Ten's Answer: "+puzzletenresult);
 
         /* solve puzzle eleven and puzzle twelve*/
-        var daysixinputvalues = santasletteropener.BreakSeal("./input/daysixinputtestvalues.txt");
-        puzzleeleven.StartElvesWorking(daysixinputvalues);
+        var daysixinputvalues = santasletteropener.BreakSeal("./input/daysixinput.txt",0);
+        var puzzleelevenresult = puzzleeleven.StartElvesWorking(daysixinputvalues,'^','#');
+        Console.WriteLine("Puzzle Eleven's Answer: "+puzzleelevenresult);
     }
 }

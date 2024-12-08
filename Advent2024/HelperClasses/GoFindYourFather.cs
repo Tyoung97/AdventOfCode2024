@@ -33,7 +33,7 @@ public class GoFindYourFather {
         /* start moving left to right in the array and find the first value that is "smaller" than the farthest right value 
         once we find one we swap their positions until we have moved everything left that should be left of our pivot value
         Not the whole time our pivot value is just sitting at the end so after we exit the loop it is still there*/
-        for (int currentsearchindex = lowindex; currentsearchindex <= highindex - 1; currentsearchindex++) {
+        for (var currentsearchindex = lowindex; currentsearchindex <= highindex - 1; currentsearchindex++) {
             /* would usually be something like this: if(array[currentsearchindex] < pivotvalue)
                 but we are using custom rules to deterimine what numbers are greater/less than other numbers */
             if(rules[pivotvalue].Item2.Contains(array[currentsearchindex])) {
@@ -56,7 +56,7 @@ public class GoFindYourFather {
         /* start moving left to right in the array and find the first value that is "smaller" than the farthest right value 
         once we find one we swap their positions until we have moved everything left that should be left of our pivot value
         Not the whole time our pivot value is just sitting at the end so after we exit the loop it is still there*/
-        for (int currentsearchindex = lowindex; currentsearchindex <= highindex - 1; currentsearchindex++) {
+        for (var currentsearchindex = lowindex; currentsearchindex <= highindex - 1; currentsearchindex++) {
             if(array[currentsearchindex] < pivotvalue) {
                 currentindex++;
                 SonOfANutcracker(array, currentindex, currentsearchindex);
