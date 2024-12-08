@@ -42,4 +42,12 @@ public class SantasLetterOpener {
         }
         return breakseallist;
     }
+        public Dictionary<long,int[]> BreakSeal(string path, char firstsplit, char secondsplit) {
+        var breaksealdict = new Dictionary<long,int[]>();
+        var lines = File.ReadLines(path);
+        foreach(var line in lines) {
+            breaksealdict.Add(long.Parse(line.Substring(0,line.IndexOf(firstsplit))),line.Substring(line.IndexOf(firstsplit)+1,line.Length-line.IndexOf(firstsplit)-1).Trim().Split(secondsplit).Select(int.Parse).ToArray());
+        }
+        return breaksealdict;
+    }
 }

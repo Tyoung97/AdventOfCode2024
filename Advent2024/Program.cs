@@ -18,6 +18,8 @@ internal class Program {
         var puzzleten = new PuzzleTen();
         var puzzleeleven = new PuzzleEleven();
         var puzzletwelve = new PuzzleTwelve();
+        var puzzlethirteen = new PuzzleThirteen();
+        var puzzlefourteen = new PuzzleFourteen();
 
         /* solve puzzle one and puzzle two*/
         var dayonefirstlist = santasletteropener.BreakSeal("./input/puzzleonelistone.txt", int.Parse);
@@ -73,5 +75,12 @@ internal class Program {
         //Commented cause it needs a rewrite cause it's soooo FUCKING SLOW takes like 5 minutes to run
         // var puzzletwelveresult = puzzletwelve.StartElvesWorking(daysixinputvalues,'^','#');
         // Console.WriteLine("Puzzle Twelve's Answer: "+puzzletwelveresult);
+
+        /* solve puzzle thirteen and puzzle fourteen*/
+        var dayseveninputvalues = santasletteropener.BreakSeal("./input/dayseveninput.txt",':',' ');
+        var puzzlthirteenresult = puzzlethirteen.StartElvesWorking(dayseveninputvalues);
+        Console.WriteLine("Puzzle Thirteen's Answer: "+puzzlthirteenresult);
+        var puzzlfourteenresult = puzzlefourteen.StartElvesWorking(dayseveninputvalues);
+        Console.WriteLine("Puzzle Fourteen's Answer: "+puzzlfourteenresult);
     }
 }
