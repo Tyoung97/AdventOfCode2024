@@ -22,43 +22,14 @@ public class PuzzleEleven {
 
         var santasdrawingpad = new SantasDrawingPad();
 
-        var printcount = 0;
-        foreach(var input in inputtosearch) {
-            Console.Write(input.locationsymbol);
-            if(printcount == inputtosearch.GetLength(0)-1){
-                Console.Write("\r\n");
-                printcount = 0;
-            }
-            else {
-                printcount++;
-            }
-        }
-        Console.Write("\r\n");
-        printcount = 0;
-        foreach(var input in inputtosearch) {
-            Console.Write(input.locationwalked);
-            if(printcount == inputtosearch.GetLength(0)-1){
-                Console.Write("\r\n");
-                printcount = 0;
-            }
-            else {
-                printcount++;
-            }
-        }
-        Console.Write("\r\n");
-
         //First find the starting position
         foreach(var start in santasdrawingpad.LookForChimneys(inputtosearch, startsymbol)) {
             path.Add(start);
         };
-        Console.WriteLine("starting position is "+path[0][0]+","+path[0][1]);
         //Then identify wall positions
         foreach(var chimney in santasdrawingpad.LookForChimneys(inputtosearch, chimneysymbol)) {
             chimneys.Add(chimney);
         };
-        foreach(var chimney in chimneys) {
-            Console.WriteLine("found a chimney at "+chimney[0]+","+chimney[1]);
-        }
         //find draw lines and pivot direction until we hit edge of the world.
         var position = new int[3];
         position = (int[])path[0].Clone();
@@ -68,23 +39,8 @@ public class PuzzleEleven {
             currentdirection = ChangeDirection(currentdirection,direction.Count-1);
             finishedroute = position[2] == 1;
         }
-        foreach(var stop in path) {
-            Console.WriteLine(stop[0]+","+stop[1]+","+stop[2]);
-        }
         DeliverThePresents(inputtosearch,path);
         santasneakysteps = CountThePresents(inputtosearch);
-        printcount = 0;
-        foreach(var input in inputtosearch) {
-            Console.Write(input.locationwalked);
-            if(printcount == inputtosearch.GetLength(0)-1){
-                Console.Write("\r\n");
-                printcount = 0;
-            }
-            else {
-                printcount++;
-            }
-        }
-        Console.Write("\r\n");
         return santasneakysteps;
     }
     public int ChangeDirection(int currentdirection, int maxdirection) {
