@@ -8,36 +8,9 @@ public class PuzzleSixteen {
         //print input
         var ylength = input.GetLength(0);
         var xlength = input.GetLength(1);
-        for(var y = 0; y < ylength; y++){
-            for(var x = 0; x < xlength; x++){
-                Console.Write(input[y,x]);
-            }
-            Console.Write("\n");
-        }
         //get nodes
         GetNodes(input,nodelist);
-        //print nodes
-        foreach(var nodetype in nodelist){
-            Console.Write(nodetype.Key);
-            Console.Write(": ");
-            foreach(var value in nodetype.Value){
-                Console.Write("[{0}]",string.Join(", ",value));
-                Console.Write(" ");
-            };
-            Console.Write("\n");
-        }
         var antinodelist = CartesianMyNodes(nodelist,ylength-1,xlength-1,input);
-        foreach(var antinode in antinodelist){
-            Console.Write(antinode);
-            Console.Write(" ");
-        }
-        Console.Write("\n");
-        for(var y = 0; y < ylength; y++){
-            for(var x = 0; x < xlength; x++){
-                Console.Write(input[y,x]);
-            }
-            Console.Write("\n");
-        }
         int result = antinodelist.Distinct().Count();
         return result;
     }
@@ -57,7 +30,6 @@ public class PuzzleSixteen {
     }
     public List<string> CartesianMyNodes(Dictionary<char,List<int[]>> nodelist,int yupperbound,int xupperbound,char[,] input){
         var antinodes = new List<string>();
-        Console.WriteLine(yupperbound+","+xupperbound);
         foreach(var list in nodelist){
             var nodepairs = new List<List<int[]>>
             {
@@ -89,21 +61,27 @@ public class PuzzleSixteen {
                 if(skip == 1){
                     continue;
                 }
-                var yfirstantinode = yvalue+(ydirection*2);
-                var xfirstantinode = xvalue+(xdirection*2);
-                var ysecondantinode = yvalue+(ydirection*-1);
-                var xsecondantinode = xvalue+(xdirection*-1);
-                if(
+
+                var yfirstantinode = yvalue;
+                var xfirstantinode = xvalue;
+                while(
                     CheckXYin2dArrayBounds(yfirstantinode,xfirstantinode,yupperbound,xupperbound)
                 ){
                     input[yfirstantinode,xfirstantinode] = '#';
                     antinodes.Add(yfirstantinode+","+xfirstantinode);
+                    yfirstantinode += ydirection;
+                    xfirstantinode += xdirection;
                 }
-                if(
+
+                var ysecondantinode = yvalue+(ydirection*-1);
+                var xsecondantinode = xvalue+(xdirection*-1);
+                while(
                     CheckXYin2dArrayBounds(ysecondantinode,xsecondantinode,yupperbound,xupperbound)
                 ){
                     input[ysecondantinode,xsecondantinode] = '#';
                     antinodes.Add(ysecondantinode+","+xsecondantinode);
+                    ysecondantinode += ydirection*-1;
+                    xsecondantinode += xdirection*-1;
                 }
             }
         }

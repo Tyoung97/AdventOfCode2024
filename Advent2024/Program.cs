@@ -87,11 +87,12 @@ internal class Program {
         // Console.WriteLine("Puzzle Fourteen's Answer: "+puzzlefourteenresult);
 
         /* solve puzzle fifteen and puzzle sixteen*/
-        var dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeighttestinput.txt");
-        // var dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeightinput.txt");
+        var dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeightinput.txt");
         var puzzlefifteenresult = puzzlefiteen.StartElvesWorking(dayeightinputvalues);
         Console.WriteLine("Puzzle fifteen's Answer: "+puzzlefifteenresult);
-        // var puzzlsixteenresult = puzzlefourteen.StartElvesWorking(dayeightinputvalues);
-        // Console.WriteLine("Puzzle sixteen's Answer: "+puzzlsixteenresult);
+        //since we are mutating/changing values in the input set it back to its base
+        dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeightinput.txt");
+        var puzzlsixteenresult = puzzlesixteen.StartElvesWorking(dayeightinputvalues);
+        Console.WriteLine("Puzzle sixteen's Answer: "+puzzlsixteenresult);
     }
 }
