@@ -20,6 +20,8 @@ internal class Program {
         var puzzletwelve = new PuzzleTwelve();
         var puzzlethirteen = new PuzzleThirteen();
         var puzzlefourteen = new PuzzleFourteen();
+        var puzzlefiteen = new PuzzleFifteen();
+        var puzzlesixteen = new PuzzleSixteen();
 
         /* solve puzzle one and puzzle two*/
         var dayonefirstlist = santasletteropener.BreakSeal("./input/puzzleonelistone.txt", int.Parse);
@@ -78,9 +80,18 @@ internal class Program {
 
         /* solve puzzle thirteen and puzzle fourteen*/
         var dayseveninputvalues = santasletteropener.BreakSeal("./input/dayseveninput.txt",':',' ');
-        var puzzlthirteenresult = puzzlethirteen.StartElvesWorking(dayseveninputvalues);
-        Console.WriteLine("Puzzle Thirteen's Answer: "+puzzlthirteenresult);
-        var puzzlfourteenresult = puzzlefourteen.StartElvesWorking(dayseveninputvalues);
-        Console.WriteLine("Puzzle Fourteen's Answer: "+puzzlfourteenresult);
+        var puzzlethirteenresult = puzzlethirteen.StartElvesWorking(dayseveninputvalues);
+        Console.WriteLine("Puzzle Thirteen's Answer: "+puzzlethirteenresult);
+        //Commented cause it takes like 5 seconds run
+        // var puzzlefourteenresult = puzzlefourteen.StartElvesWorking(dayseveninputvalues);
+        // Console.WriteLine("Puzzle Fourteen's Answer: "+puzzlefourteenresult);
+
+        /* solve puzzle fifteen and puzzle sixteen*/
+        var dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeighttestinput.txt");
+        // var dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeightinput.txt");
+        var puzzlefifteenresult = puzzlefiteen.StartElvesWorking(dayeightinputvalues);
+        Console.WriteLine("Puzzle fifteen's Answer: "+puzzlefifteenresult);
+        // var puzzlsixteenresult = puzzlefourteen.StartElvesWorking(dayeightinputvalues);
+        // Console.WriteLine("Puzzle sixteen's Answer: "+puzzlsixteenresult);
     }
 }

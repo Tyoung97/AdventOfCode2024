@@ -5,8 +5,6 @@ namespace Advent2024;
 public class PuzzleThirteen {
     public long StartElvesWorking(Dictionary<long,int[]> inputcompare) {
         long piperspiping = 0;
-        var cartesians = new Dictionary<long,int[]>();
-        var sequencetest = new List<int[]>();
         foreach (var input in inputcompare) {
             var sequences = new List<int[]>();
             for (var x = 0; x < input.Value.Length-1; x++) {

@@ -37,32 +37,37 @@ public class PuzzleEight {
                 rightsum = 0;
                 if (input[x,y] == 'A') {
                     /* upleft */
-                    leftsum += input[x-1,y-1] switch {
+                    leftsum += input[x - 1, y - 1] switch
+                    {
                         'M' => 1,
                         'S' => 0,
                         'X' => 3,
-                        'A' => 3
+                        'A' => 3,
+                        _ => 0
                     };
                     /* downright */
                     leftsum += input[x+1,y+1] switch {
                         'M' => 1,
                         'S' => 0,
                         'X' => 3,
-                        'A' => 3
+                        'A' => 3,
+                        _ => 0
                     };
                     /* upright */
                     rightsum += input[x+1,y-1] switch {
                         'M' => 1,
                         'S' => 0,
                         'X' => 3,
-                        'A' => 3
+                        'A' => 3,
+                        _ => 0
                     };
                     /* downleft */
                     rightsum += input[x-1,y+1] switch {
                         'M' => 1,
                         'S' => 0,
                         'X' => 3,
-                        'A' => 3
+                        'A' => 3,
+                        _ => 0
                     };
                     xmascount = leftsum == 1 && rightsum == 1 ? xmascount+1 : xmascount;
                 }
