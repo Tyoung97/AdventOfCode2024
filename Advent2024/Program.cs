@@ -22,6 +22,8 @@ internal class Program {
         var puzzlefourteen = new PuzzleFourteen();
         var puzzlefiteen = new PuzzleFifteen();
         var puzzlesixteen = new PuzzleSixteen();
+        var puzzleseventeen = new PuzzleSeventeen();
+        // var puzzlesixteen = new PuzzleEighteen();
 
         /* solve puzzle one and puzzle two*/
         var dayonefirstlist = santasletteropener.BreakSeal("./input/puzzleonelistone.txt", int.Parse);
@@ -94,5 +96,10 @@ internal class Program {
         dayeightinputvalues = santasletteropener.FileTo2dCharArray("./input/dayeightinput.txt");
         var puzzlsixteenresult = puzzlesixteen.StartElvesWorking(dayeightinputvalues);
         Console.WriteLine("Puzzle sixteen's Answer: "+puzzlsixteenresult);
+
+        /* solve puzzle fifteen and puzzle sixteen*/
+        var daynineinputvalues = santasletteropener.ReadinStringToCharArray("./input/dayninetestinput.txt");
+        var puzzleseventeenresult = puzzleseventeen.StartElvesWorking(daynineinputvalues);
+        Console.WriteLine("Puzzle fifteen's Answer: "+puzzleseventeenresult);
     }
 }

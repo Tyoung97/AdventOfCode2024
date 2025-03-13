@@ -65,4 +65,14 @@ public class SantasLetterOpener {
         }
         return CharArray;
     }
+    public char[] ReadinStringToCharArray(string path){
+        var arrayposition = 0;
+        var lines = File.ReadLines(path).ToList();
+        var CharArray = new char[lines[0].Length];
+        foreach(var character in lines[0]){
+            CharArray[arrayposition] = character;
+            arrayposition++;
+        }
+        return CharArray;
+    }
 }
